@@ -10,8 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^9.3.7",
     "react": "17.0.2",
-    "react-native": "0.67.3"
+    "react-native": "0.67.3",
+    "react-native-progress": "^5.0.0",
+    "react-native-restart": "0.0.24",
+    "react-native-svg": "^13.7.0",
+    "react-native-webview": "^11.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

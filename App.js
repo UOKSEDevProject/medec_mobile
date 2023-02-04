@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, StatusBar, SafeAreaView, LogBox} from 'react-native';
 import SplashScreen from './src/screens/SplashScreen';
 import WebApp from './src/screens/WebApp';
+import PushController from './src/controller/PushController';
 
 LogBox.ignoreAllLogs();
 
@@ -21,6 +22,7 @@ const App = () => {
             <MyStatusBar backgroundColor="red" barStyle="default"/>
             <SplashScreen onLoad={onLoad}/>
             <WebApp setOnLoad={setOnLoad}/>
+            <PushController />
         </View>
     );
 };

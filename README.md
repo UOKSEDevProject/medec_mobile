@@ -1,1 +1,0 @@
-# medec-mobile

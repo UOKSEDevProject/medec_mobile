@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1012792620758:android:6b788b3b3f76f80876fb77",
+        "android_client_info": {
+          "package_name": "com.medec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012792620758-40h6j8gf01mubkv0vtmb3c4687okv9q6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFOyq2xmRz6ADoKs1l5Rf5QlGnLj57gO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012792620758-40h6j8gf01mubkv0vtmb3c4687okv9q6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1012792620758:android:dc5baab92a1e9bb876fb77",
         "android_client_info": {
           "package_name": "com.medec_mobile"

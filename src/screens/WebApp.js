@@ -8,18 +8,19 @@ import CAlert from '../components/Alert/CAlert';
 import {WEB_VIEW_URL} from '../constant/links';
 
 let jsCode = `setInterval(()=>{
-  if(window.ReactNativeWebView) window.ReactNativeWebView.postMessage(JSON.stringify({location: window.location.href}));
-}, 100)`;
+  if(window.ReactNativeWebView) 
+    {
+      window.ReactNativeWebView.postMessage(JSON.stringify({location: window.location.href}));
+    }
+  }, 100)`;
 
 const WebApp = props => {
-  const {setOnLoad} = props;
-
-  const webViewRef = useRef(null);
-  const [webData, setWebData] = useState({})
+  const {setOnLoad,FCMToken} = props;
+  let webViewRef = useRef(null);
   const [messageData, setMessageData] = useState(WEB_VIEW_URL);
   const [exitAlertVisibility, setExitAlertVisibility] = useState(false);
-  const [connectionAlertVisibility, setConnectionAlertVisibility] =
-    useState(false);
+  const [connectionAlertVisibility, setConnectionAlertVisibility] = useState(false);
+  const [jsInject,setJsInject] = useState(null);
 
   useEffect(() => {
     const backAction = () => {
@@ -52,6 +53,12 @@ const WebApp = props => {
     };
   }, [messageData]);
 
+  useEffect(() => {
+    if(FCMToken){
+      sendDataToWebView();
+    }
+  },[FCMToken])
+
   const errorHandler = () => {
     setConnectionAlertVisibility(true);
   };
@@ -69,6 +76,18 @@ const WebApp = props => {
       }
     });
   };
+
+  function sendDataToWebView() {
+    setJsInject(`
+      setInterval(()=>{
+        if(window.ReactNativeWebView) 
+          {
+            window.ReactNativeWebView.postMessage(JSON.stringify({location: window.location.href}));
+          }
+        }, 100); 
+      window.sessionStorage.setItem('FCMToken',${JSON.stringify(FCMToken.token)});
+    `);
+  }
 
   return (
     <View style={styles.screen}>
@@ -92,12 +111,12 @@ const WebApp = props => {
             JSON.parse(msg.nativeEvent.data).location !== messageData
           ) {
             setMessageData(JSON.parse(msg.nativeEvent.data).location);
-            setWebData(msg.nativeEvent);
           }
         }}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        injectedJavaScript={jsCode}
+        // injectedJavaScript={`${jsCode}`}
+        injectedJavaScript={`${jsInject}`}
         userAgent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0"
       />
 
